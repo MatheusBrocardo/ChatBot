@@ -1,0 +1,29 @@
+services:
+  
+  redis:
+    image: redis:latest
+    container_name: wpp_bot_redis
+    # restart: always
+    ports:
+      - '6379:6379'  # Formato de lista
+
+  waha:
+    image: devlikeapro/waha:latest
+    container_name: wpp_bot_waha
+    # restart: always
+    environment:
+      - WAHA_PRINT_QR=FALSE
+    ports:
+      - '3000:3000'  # Agora usa o formato de lista aqui também
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: whatsapp_api_sage
+    # restart: always
+    ports:
+      - '5000:5000'  # Mantém o formato de lista consistente
+    volumes:
+      - .:/app
+      - ./chroma_data:/app/chroma_data
