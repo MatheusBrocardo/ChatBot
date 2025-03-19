@@ -1,6 +1,6 @@
 
 from flask import Blueprint,jsonify,request
-from services.waha import Waha
+from bot.bot import GerenciaMensagem
 import time,random
 
 hook = Blueprint('hook', __name__)
@@ -22,6 +22,13 @@ def webhook():
     # Caso seja um grupo ou status, retorna um status de sucesso, sem enviar retorno
     if is_group or is_status:
         return jsonify({'status':'success'}),200
+
+    # Create an instance of GerenciaMensagem with the required arguments
+    gerencia_mensagem = GerenciaMensagem(chat_id=chat_id, mensagem=received_message)
+
+    # Process the received message
+    gerencia_mensagem.recebe_mensagem(chat_id=chat_id, mensagem=received_message)
+        
 
     return jsonify({'status': 'success'}), 200
 
