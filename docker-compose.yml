@@ -8,7 +8,6 @@ services:
       - '6379:6379'  # Formato de lista
     volumes:
       - ./redis_data:/data
-
   waha:
     image: devlikeapro/waha:latest
     container_name: wpp_bot_waha

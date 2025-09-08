@@ -29,7 +29,6 @@ def webhook():
     # Process the received message
     gerencia_mensagem.recebe_mensagem(chat_id=chat_id, mensagem=received_message)
         
-
     return jsonify({'status': 'success'}), 200
 
 # @hook.route('/chatbot/webhook/aimessage', methods=['POST'])
